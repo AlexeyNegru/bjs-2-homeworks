@@ -26,11 +26,8 @@ function calculateTotalMortgage(percent, contribution, amount, countMonths) {
 
   let P = 1/12 * percent;
   let S = amount - contribution; 
-  let paymentOfMonth = S * (P + (P / (((1 + P)^n) - 1)));
-  let totalAmount = paymentOfMonth * countMonths;
-  let numberDayOfLoan = Number(totalAmount.toFixed(2));
-  let numberMonthOfLoan = Number(paymentOfMonth.toFixed(2));
+  let paymentOfMonth = S * (P + (P / (((1 + P)**countMonths) - 1)));
+  let totalAmount = +(paymentOfMonth * countMonths).toFixed(2);
+  return totalAmount;
 
-  console.log(`Ежемесячный платеж ${numberMonthOfLoan} рублей \n Итого будетзаплачено за ${countMonths} месяцев ${numberDayOfLoan} рублей`);
-  return numberDayOfLoan;
 }

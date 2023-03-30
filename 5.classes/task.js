@@ -84,4 +84,47 @@ class Library {
     }
 }
 
+class Student {
+    constructor(name) {
+      this.name = name;
+      this.marks = {};
+    }
+    addMark (mark,subject){
+      if (mark < 2 || mark > 5) {
+        return;
+      }
+      if ([subject] in this.marks) {
+        this.marks[subject].push(mark)
+        } else {
+          this.marks[subject]=[];
+          this.marks[subject].push(mark);
+        }
+      }
+    getAverageBySubject(subject){
+      if (!(subject in this.marks)) {
+        return 0;
+      }
+      return this.marks[subject].reduce((acc, item, index, arr) => { 
+        acc+=item;
+        if(index === arr.length - 1) {
+           return acc / arr.length;
+        } 
+        return acc;
+        }, 0);
+      }
+    getAverage(){
+      let keysArr = Object.keys(this.marks);
+      let sum = 0;
+      if (keysArr.length === 0) {
+        return 0;
+      }
+      for (let i = 0; i < keysArr.length; i++) {
+        sum += this.getAverageBySubject(keysArr[i])
+      }
+      return sum / keysArr.length;
+    }
+    getCurrentFormattedTime(){
+      return String(time)
+    }
+  }
 
